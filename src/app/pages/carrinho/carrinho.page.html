@@ -10,4 +10,19 @@
       <ion-title size="large">Carrinho</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-list>
+    <ion-item *ngFor="let produto of carrinho">
+      <ion-label>
+        <h2>{{ produto.nome }}</h2>
+        <p>Preço: R$ {{ produto.preco }}</p>
+      </ion-label>
+      <ion-button (click)="removerProduto(produto.id)" color="danger">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="full" (click)="irParaProdutos()">Adicionar Mais Produtos</ion-button>
+
 </ion-content>
