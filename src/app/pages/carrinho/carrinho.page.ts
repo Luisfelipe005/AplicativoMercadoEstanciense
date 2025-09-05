@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CarrinhoService } from '../carrinho.service'; // Importa o serviço
+import { CarrinhoService } from './carrinho.service';
 import {
   IonContent,
   IonHeader,
@@ -12,25 +12,29 @@ import {
   IonItem,
   IonLabel,
   IonButton,
-  IonIcon
+  IonIcon,
+  IonFooter
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { trashOutline } from 'ionicons/icons';
 
-addIcons({
-  'trash-outline': trashOutline,
-});
+addIcons({ 'trash-outline': trashOutline });
 
 @Component({
   selector: 'app-carrinho',
   templateUrl: './carrinho.page.html',
   styleUrls: ['./carrinho.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonList, IonItem, IonLabel, IonButton, IonIcon]
+  imports: [
+    IonContent, IonHeader, IonTitle, IonToolbar,
+    CommonModule, FormsModule, IonList, IonItem,
+    IonLabel, IonButton, IonIcon, IonFooter
+  ]
 })
 export class CarrinhoPage implements OnInit {
 
   carrinho: any[] = [];
+  total: number = 0;
 
   constructor(
     private router: Router,
@@ -38,15 +42,26 @@ export class CarrinhoPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.carregarCarrinho();
+  }
+
+  carregarCarrinho() {
     this.carrinho = this.carrinhoService.pegarProdutosDoCarrinho();
+    this.total = this.carrinhoService.calcularTotal();
   }
 
   removerProduto(produtoId: number) {
     this.carrinhoService.removerProduto(produtoId);
-    this.carrinho = this.carrinhoService.pegarProdutosDoCarrinho();
+    this.carregarCarrinho();
   }
 
   irParaProdutos() {
     this.router.navigate(['/produtos']);
+  }
+
+  finalizarCompra() {
+    alert("Compra finalizada! Obrigado.");
+    this.carrinho = [];
+    this.total = 0;
   }
 }

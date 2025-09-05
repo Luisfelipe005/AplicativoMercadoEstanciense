@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class CarrinhoService {
 
-
   listaDoCarrinho: any[] = [];
 
   constructor() { }
@@ -20,5 +19,9 @@ export class CarrinhoService {
 
   pegarProdutosDoCarrinho(): any[] {
     return this.listaDoCarrinho;
+  }
+
+  calcularTotal(): number {
+    return this.listaDoCarrinho.reduce((soma, item) => soma + (item.preco * (item.qtd || 1)), 0);
   }
 }

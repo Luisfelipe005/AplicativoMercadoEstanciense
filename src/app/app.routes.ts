@@ -11,19 +11,11 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'carinnho',
-    loadComponent: () => import('./page/carinnho/carinnho.page').then( m => m.CarinnhoPage)
-  },
-  {
-    path: 'carinnho',
-    loadComponent: () => import('./pages/carinnho/carinnho.page').then( m => m.CarinnhoPage)
-  },
-  {
     path: 'carrinho',
-    loadComponent: () => import('./pages/carrinho/carrinho.page').then( m => m.CarrinhoPage)
+    loadComponent: () => import('./pages/carrinho/carrinho.page').then(m => m.CarrinhoPage)
   },
   {
     path: 'produtos',
-    loadComponent: () => import('./pages/produtos/produtos.page').then( m => m.ProdutosPage)
+    loadComponent: () => import('./pages/produtos/produtos.page').then(m => m.ProdutosPage)
   },
 ];

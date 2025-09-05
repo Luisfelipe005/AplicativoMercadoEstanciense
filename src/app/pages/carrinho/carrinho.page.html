@@ -1,20 +1,16 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-title>Carrinho</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Carrinho</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
+<ion-content>
   <ion-list>
     <ion-item *ngFor="let produto of carrinho">
       <ion-label>
-        <h2>{{ produto.nome }}</h2>
+        <h2>{{ produto.nome }} ({{ produto.tamanho || 'M' }})</h2>
+        <p>{{ produto.descricao || 'Sem descrição' }}</p>
+        <p>Qtd: {{ produto.qtd || 1 }}</p>
         <p>Preço: R$ {{ produto.preco }}</p>
       </ion-label>
       <ion-button (click)="removerProduto(produto.id)" color="danger">
@@ -23,6 +19,15 @@
     </ion-item>
   </ion-list>
 
-  <ion-button expand="full" (click)="irParaProdutos()">Adicionar Mais Produtos</ion-button>
+  <div style="text-align: center; margin: 20px;">
+    <h2>Total: R$ {{ total }}</h2>
+  </div>
 
+  <ion-button expand="full" (click)="irParaProdutos()">
+    Adicionar Mais Produtos
+  </ion-button>
+
+  <ion-button expand="full" color="success" (click)="finalizarCompra()">
+    Finalizar Compra
+  </ion-button>
 </ion-content>
